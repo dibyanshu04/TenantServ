@@ -1,1 +1,0 @@
-<?php// Heading$_['heading_title']    = 'Middel';// Error$_['error_permission'] = 'Waarschuwing: u bent niet gemachtigd om dashboardbestellingen te wijzigen!';
