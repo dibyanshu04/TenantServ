@@ -57,7 +57,8 @@ if (isset($_POST['signin'])) {
                     <span class="icon-bar"></span>
                 </button>
                 <a class="logo" href="index.php">
-                    <strong style="color:#34495e; font-size:18px;">Tenant Serv (REMS)</strong>
+                    <img src="assets/logo/dsd1-removebg.png" style=" height: 100px; padding: 10px;">
+                    <!-- <strong style="color:#34495e; font-size:18px;">Tenant Serv (REMS) </strong> -->
                 </a>
             </div>
 
@@ -88,12 +89,12 @@ if (isset($_POST['signin'])) {
                             </ul>
                         <?php } ?>
                     </li>
-                    <?php if (strlen($_SESSION['remsuid'] == 0)) { ?>
+                    <!-- <?php if (strlen($_SESSION['remsuid'] == 0)) { ?>
                         <li>
                             <a href="admin/login.php">admin</a>
 
                         </li>
-                    <?php } ?>
+                    <?php } ?> -->
                 </ul>
                 <!-- Module Signup  -->
 
