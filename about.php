@@ -25,7 +25,7 @@ include('includes/dbconnection.php');
 
     <!-- Document Title
     ============================================= -->
-    <title>Tenant Serv|| About Us</title>
+    <title>Tenant Serv | About Us</title>
 </head>
 
 <body>
@@ -71,7 +71,7 @@ include('includes/dbconnection.php');
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-5 col-md-5">
-                        <div class="about--img"><img class="img-responsive" src="assets/images/about/real-estate.jpg" width="350" height="350" alt="about img"></div>
+                        <div class="about--img"><img class="img-responsive" src="assets/images/about/images1.jfif" width="350" height="350" alt="about img"></div>
                     </div>
                     <!-- .col-md-5 -->
                     <div class="col-xs-12 col-sm-7 col-md-6 col-md-offset-1">
@@ -94,8 +94,33 @@ include('includes/dbconnection.php');
                             <!-- .about-panel end -->
 
                             <!-- .about-panel end -->
+                        <?php } ?>
                     </div>
-                <?php } ?>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5 col-md-5">
+                      <h5>TENANT SERV - UNLOCK YOUR DREAM HOME!!!</h5>
+                      <p>
+                          Launched in the year 2022 with operations in Bangalore We
+                          formed our company understanding that people who relocate
+                          are facing hassles in finding right house. We offer service
+                          to Tenants and Landlords/Property owners We will assist
+                          Tenants to get direct contacts with owners We have a best in
+                          class user friendly website and a mobile app to sit in
+                          comfort of your place to search your dream home/Property.
+                      </p>
+                      <p>
+                          IF you are landlord interested in posting your house or
+                          apartment in <a href="https://tenantserv.com/">Tenantserv</a> then email us @
+                          XXX@Tenantserv.com
+                      </p>
+                    </div>
+                    <!-- .col-md-5 -->
+                    <div class="col-xs-12 col-sm-7 col-md-6 col-md-offset-1">
+                      <div class="about--img"><img class="img-responsive" src="assets/images/about/images22.jfif" width="500" height="500" alt="about img"></div>
+                    </div>
+
                 </div>
 
             </div>

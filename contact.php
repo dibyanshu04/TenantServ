@@ -25,7 +25,7 @@ include('includes/dbconnection.php');
 
     <!-- Document Title
     ============================================= -->
-    <title>Tenant Serv||Contact Us</title>
+    <title>Tenant Serv | Contact Us</title>
 </head>
 
 <body>
@@ -102,8 +102,37 @@ include('includes/dbconnection.php');
                         <!-- .col-md-3 end -->
 
                         <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-1 bg-white p-30 bg-white">
+                          <div class="container py-4">
+                            <h5>Have any question? Drop us your query!</h5>
 
-                            <div class="about--img"><img class="img-responsive" src="assets/images/about/images.jpg" width="2000" height="2000" alt="about img"></div>
+                            <form method="post" action="/contact">
+                              <div class="form-group col-md-7">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                              </div>
+                              <div class="form-group col-md-7">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your name" aria-describedby="emailHelp">
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                              </div>
+                              <div class="form-group col-md-7">
+                                <label for="phone" class="form-label">Phone number</label>
+                                <input type="phone" class="form-control" id="phone" name="phone" placeholder="Enter your contact number">
+                              </div>
+                              <div class="form-group col-md-7">
+                                <label for="desc">How can i help you?</label>
+                                <textarea type="text" class="form-control" id="desc" name="desc" placeholder="Enter your query!"></textarea>
+                              </div>
+                              <div class="mb-3 form-check col-md-7">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                              </div>
+                              <div class="col-md-7">
+                                <button type="submit" class="btn btn-dark" style="background-color: #64ddbb">Submit</button>
+                              </div>        
+                            </form>
+                          </div>
+
                         </div>
                         <!-- .col-md-8 end -->
                 </div>
