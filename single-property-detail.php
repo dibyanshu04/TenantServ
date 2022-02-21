@@ -4,8 +4,8 @@ error_reporting(0);
 include('includes/dbconnection.php');
 
 if (isset($_POST['submit'])) {
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
+    $fullname = mysqli_real_escape_string($con, $_POST['fullname']);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
     $mobilenumber = $_POST['mobnum'];
     $message = $_POST['message'];
     $enquirynumber = mt_rand(100000000, 999999999);
@@ -25,7 +25,7 @@ if (isset($_POST['submitreview'])) {
     if (strlen($_SESSION['remsuid'] == 0)) {
         echo '<script>alert("Login required for publish review")</script>';
     } else {
-        $review = $_POST['reviewcomment'];
+        $review = mysqli_real_escape_string($con, $_POST['reviewcomment']);
         $uid = $_SESSION['remsuid'];
         $pid = $_GET['proid'];
         $query = mysqli_query($con, "insert into tblfeedback(UserId,PropertyId,UserRemark) value('$uid','$pid','$review')");
@@ -118,7 +118,7 @@ if (isset($_POST['submitreview'])) {
                                     </div>
                                     <div class="pull-right">
                                         <span class="property--status"><?php echo $row['Status']; ?></span>
-                                        <p class="property--price"><?php echo $row['RentorsalePrice']; ?></p>
+                                        <p class="property--price">₹ <?php echo $row['RentorsalePrice']; ?></p>
                                     </div>
                                 </div>
                                 <!-- .property-info end -->
@@ -507,11 +507,11 @@ if (isset($_POST['submitreview'])) {
                                     </div>
                                     <!-- .col-md-12 end -->
                                     <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.8598720028194!2d77.5319565498426!3d12.980813090804903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3dc3eff43f4d%3A0xdd5862d0efa0889b!2sSelvam%20Industrial%20Estate%2C%20105%2C%20Magadi%20Main%20Rd%2C%20Prashant%20Nagar%2C%20Basaveshwar%20Nagar%2C%20Bengaluru%2C%20Karnataka%20560079!5e0!3m2!1sen!2sin!4v1644231232809!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                        <iframe src="<?php echo $row['url'] ?>" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                         <br>
                                         <br>
                                         <ul class="list-unstyled mb-20">
-                                            
+
                                             <li><span>Address:</span><?php echo $row['Address']; ?></li>
                                             <li><span>City:</span><?php echo $row['City']; ?></li>
                                             <li><span>Country:</span><?php echo $row['CountryName']; ?></li>
@@ -798,7 +798,7 @@ if (isset($_POST['submitreview'])) {
                                                 <?php echo $row['City']; ?>&nbsp;
                                                 <?php echo $row['State']; ?>&nbsp;
                                                 <?php echo $row['Country']; ?></p>
-                                            <p class="property--price"><?php echo $row['RentorsalePrice']; ?></p>
+                                            <p class="property--price">₹ <?php echo $row['RentorsalePrice']; ?></p>
                                         </div>
                                         <!-- .property-info end -->
                                         <div class="property--features">

@@ -160,7 +160,7 @@ include('includes/dbconnection.php');
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="heading heading-2 text-center mb-70">
                             <h2 class="heading--title">Latest Properties</h2>
-                            <p class="heading--desc">Duis aute irure dolor in reprehed in volupted velit esse dolore</p>
+                            <p class="heading--desc">Bellow are our latest properties</p>
                         </div>
                         <!-- .heading-title end -->
                     </div>
@@ -173,8 +173,9 @@ include('includes/dbconnection.php');
                             <!-- .property-item #1 -->
                             <?php
 
-                            $query = mysqli_query($con, "select * from tblproperty order by rand() limit 9");
+                            $query = mysqli_query($con, "select * from tblproperty where approve='1' order by rand() limit 9");
                             while ($row = mysqli_fetch_array($query)) {
+                               
                             ?>
                                 <div class="property-item">
                                     <div class="property--img">
@@ -191,7 +192,7 @@ include('includes/dbconnection.php');
                                                 <?php echo $row['City']; ?>&nbsp;
                                                 <?php echo $row['State']; ?>&nbsp;
                                                 <?php echo $row['Country']; ?></p>
-                                            <p class="property--price"><?php echo $row['RentorsalePrice']; ?></p>
+                                            <p class="property--price">₹ <?php echo $row['RentorsalePrice']; ?></p>
                                         </div>
                                         <!-- .property-info end -->
                                         <div class="property--features">
@@ -204,7 +205,10 @@ include('includes/dbconnection.php');
                                         <!-- .property-features end -->
                                     </div>
                                 </div>
-                            <?php } ?>
+                            <?php 
+                                
+                            }
+                            ?>
 
 
                         </div>

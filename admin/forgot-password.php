@@ -5,7 +5,7 @@ include('includes/dbconnection.php');
 
 if (isset($_POST['submit'])) {
     $contactno = $_POST['contactno'];
-    $email = $_POST['email'];
+    $email = mysqli_real_escape_string($con, $_POST['email']);
 
     $query = mysqli_query($con, "select ID from tbladmin where  Email='$email' and MobileNumber='$contactno' ");
     $ret = mysqli_fetch_array($query);

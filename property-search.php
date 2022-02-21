@@ -105,6 +105,28 @@
                             </div>
                         </div>
 
+                        <!-- widget property bedrooms
+=============================-->
+                        <div class="widget widget-property">
+                            <div class="widget--title">
+                                <h5>Number of BHK</h5>
+                            </div>
+                            <div class="widget--content">
+                                <?php
+                                $query4 = mysqli_query($con, "select distinct Bedrooms from  tblproperty");
+                                while ($row7 = mysqli_fetch_array($query4)) {
+                                ?>
+                                    <ul class="list-unstyled mb-0">
+                                        <li>
+                                            <a href="bedroomwise-property-details.php?bedrid=<?php echo $row7['Bedrooms']; ?>"><?php echo $row7['Bedrooms']; ?></a>
+                                        </li>
+                                    <?php } ?>
+
+                                    </ul>
+                            </div>
+                        </div>
+                        <!-- . widget property bedrooms end -->
+
                     </div>
                     <!-- .col-md-4 end -->
                     <div class="col-xs-12 col-sm-12 col-md-8">
@@ -151,7 +173,7 @@
                                                             <?php echo $row['City']; ?>&nbsp;
                                                             <?php echo $row['StateName']; ?>&nbsp;
                                                             <?php echo $row['CountryName']; ?></p>
-                                                        <p class="property--price"><?php echo $row['RentorsalePrice']; ?></p>
+                                                        <p class="property--price">₹ <?php echo $row['RentorsalePrice']; ?></p>
                                                     </div>
                                                     <!-- .property-info end -->
                                                     <div class="property--features">

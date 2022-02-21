@@ -11,6 +11,12 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <title>Tenant Serv | Properties Grid</title>
+
+    <!-- Jquery for price filter -->
+    <script src="assets/js/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="assets/css/jquery-ui.css">
+
 </head>
 
 <body>
@@ -32,6 +38,26 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-4">
+                        <!-- widget property price range
+=============================-->
+
+                        <div class="widget widget-property">
+
+                            <div class="widget--title">
+                                <h5>Price Range</h5>
+                            </div>
+
+                            <div class="widget--content">
+                                <ul class="list-unstyled mb-0">
+                                    <input type="hidden" id="hidden_minimum_price" value="2000">
+                                    <input type="hidden" id="hidden_maximum_price" value="6800000">
+                                    <p id="price_show">2000-6800000</p>
+                                    <div id="price_range"></div>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- . widget property price range end -->
                         <!-- widget property type
 =============================-->
 
@@ -47,11 +73,12 @@
                                     $query3 = mysqli_query($con, "select distinct Type from  tblproperty");
                                     while ($row3 = mysqli_fetch_array($query3)) {
                                     ?>
-                                        <li>
-                                            <a href="protypewise-property-detail.php?protypeid=<?php echo $row3['Type']; ?>"><?php echo $row3['Type']; ?></a>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" class="common_selector Type" value="<?php echo $row3['Type']; ?>"><?php echo $row3['Type']; ?>
+                                            </label>
+                                        </div>
 
-
-                                        </li>
                                     <?php } ?>
 
                                 </ul>
@@ -67,17 +94,22 @@
                                 <h5>Property Status</h5>
                             </div>
                             <div class="widget--content">
-                                <?php
-                                $query4 = mysqli_query($con, "select distinct Status from  tblproperty");
-                                while ($row4 = mysqli_fetch_array($query4)) {
-                                ?>
-                                    <ul class="list-unstyled mb-0">
-                                        <li>
-                                            <a href="statuswise-property-detail.php?stproid=<?php echo $row4['Status']; ?>"><?php echo $row4['Status']; ?></a>
-                                        </li>
+                                <ul class="list-unstyled mb-0">
+                                    <?php
+                                    $query4 = mysqli_query($con, "select distinct Status from  tblproperty");
+                                    while ($row4 = mysqli_fetch_array($query4)) {
+                                    ?>
+
+
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" class="common_selector Status" value="<?php echo $row4['Status']; ?>"><?php echo $row4['Status']; ?>
+                                            </label>
+
+                                        </div>
                                     <?php } ?>
 
-                                    </ul>
+                                </ul>
                             </div>
                         </div>
                         <!-- . widget property status end -->
@@ -95,15 +127,70 @@
                                     $query5 = mysqli_query($con, "select distinct City from  tblproperty");
                                     while ($row5 = mysqli_fetch_array($query5)) {
                                     ?>
-                                        <li>
-                                            <a href="citywise-property-detail.php?cityproid=<?php echo $row5['City']; ?>"><?php echo $row5['City']; ?></a>
-                                        </li>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" class="common_selector Cities" value="<?php echo $row5['City']; ?>"><?php echo $row5['City']; ?>
+                                            </label>
+                                        </div>
 
                                     <?php } ?>
 
                                 </ul>
                             </div>
                         </div>
+
+
+
+                        <!-- widget property bedrooms
+=============================-->
+                        <div class="widget widget-property">
+                            <div class="widget--title">
+                                <h5>Number of BHK</h5>
+                            </div>
+                            <div class="widget--content">
+                                <ul class="list-unstyled mb-0">
+                                    <?php
+                                    $query6 = mysqli_query($con, "select distinct Bedrooms from  tblproperty ORDER BY Bedrooms ASC");
+                                    while ($row6 = mysqli_fetch_array($query6)) {
+                                    ?>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" class="common_selector BHK" value="<?php echo $row6['Bedrooms']; ?>"><?php echo $row6['Bedrooms']; ?>
+                                            </label>
+                                        </div>
+
+                                    <?php } ?>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- . widget property bedrooms end -->
+
+                        <!-- widget property State
+=============================-->
+                        <div class="widget widget-property">
+                            <div class="widget--title">
+                                <h5>Property By State</h5>
+                            </div>
+                            <div class="widget--content">
+                                <ul class="list-unstyled mb-0">
+                                    <?php
+                                    $query7 = mysqli_query($con, "select distinct tblstate.StateName from  tblproperty join tblstate on tblstate.ID=tblproperty.State ");
+                                    while ($row7 = mysqli_fetch_array($query7)) {
+                                    ?>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" class="common_selector State" value="<?php echo $row7['StateName']; ?>"><?php echo $row7['StateName']; ?>
+                                            </label>
+                                        </div>
+
+                                    <?php } ?>
+
+                                </ul>
+                            </div>
+                        </div>
+
+
 
                     </div>
                     <!-- .col-md-4 end -->
@@ -138,45 +225,14 @@
                                 $total_rows = mysqli_fetch_array($result)[0];
                                 $total_pages = ceil($total_rows / $no_of_records_per_page);
 
-
-                                $query = mysqli_query($con, "select tblproperty.*,tblcountry.CountryName,tblstate.StateName from tblproperty join tblcountry on tblcountry.ID=tblproperty.Country join tblstate on tblstate.ID=tblproperty.State LIMIT $offset, $no_of_records_per_page");
-                                while ($row = mysqli_fetch_array($query)) {
                                 ?>
 
-                                    <div class="col-xs-12 col-sm-6 col-md-6" width='300' height='300'>
-                                        <!-- .property-item #1 -->
-                                        <div class="property-item">
-                                            <div class="property--img">
-                                                <a href="single-property-detail.php?proid=<?php echo $row['ID']; ?>">
-                                                    <img src="propertyimages/<?php echo $row['FeaturedImage']; ?>" alt="<?php echo $row['PropertyTitle']; ?>" width='380' height='300'>
-                                                </a>
-                                                <span class="property--status"><?php echo $row['Status']; ?></span>
-                                            </div>
-                                            <div class="property--content">
-                                                <div class="property--info">
-                                                    <h5 class="property--title">
-                                                        <a href="single-property-detail.php?proid=<?php echo $row['ID']; ?>">
-                                                            <?php echo $row['PropertyTitle']; ?></a>
-                                                    </h5>
-                                                    <p class="property--location"><?php echo $row['Address']; ?>&nbsp;
-                                                        <?php echo $row['City']; ?>&nbsp;
-                                                        <?php echo $row['StateName']; ?>&nbsp;
-                                                        <?php echo $row['CountryName']; ?></p>
-                                                    <p class="property--price"><?php echo $row['RentorsalePrice']; ?></p>
-                                                </div>
-                                                <!-- .property-info end -->
-                                                <div class="property--features">
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li><span class="feature">Beds:</span><span class="feature-num"><?php echo $row['Bedrooms']; ?></span></li>
-                                                        <li><span class="feature">Baths:</span><span class="feature-num"><?php echo $row['Bathrooms']; ?></span></li>
-                                                        <li><span class="feature">Area:</span><span class="feature-num"><?php echo $row['Area']; ?></span></li>
-                                                    </ul>
-                                                </div>
-                                                <!-- .property-features end -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php } ?>
+
+                                <div class="row filter_data">
+
+                                </div>
+
+
 
                                 <!-- .property item end -->
 
@@ -242,6 +298,77 @@
     </div>
     <!-- #wrapper end -->
 
+    <!-- Filteration -->
+    <style>
+        #loading {
+            text-align: center;
+            background: url('assets/loader.gif') no-repeat center;
+            height: 150px;
+        }
+    </style>
+
+
+    <script>
+        $(document).ready(function() {
+            filter_data();
+
+            function filter_data() {
+                $('.filter_data').html('<div id="loading"></div>');
+                var action = 'fetch_data';
+                var minimum_price = $('#hidden_minimum_price').val();
+                var maximum_price = $('#hidden_maximum_price').val();
+                var Type = get_filter('Type');
+                var Status = get_filter('Status');
+                var City = get_filter('Cities');
+                var Bhk = get_filter('BHK');
+                var State = get_filter('State');
+                $.ajax({
+                    url: "fetch_data.php",
+                    method: "POST",
+                    data: {
+                        action: action,
+                        minimum_price: minimum_price,
+                        maximum_price: maximum_price,
+                        Type: Type,
+                        Status: Status,
+                        City: City,
+                        Bhk: Bhk,
+                        State: State
+                    },
+                    success: function(data) {
+                        $('.filter_data').html(data);
+                    }
+                })
+            }
+
+            function get_filter(class_name) {
+                var filter = [];
+                $('.' + class_name + ':checked').each(function() {
+                    filter.push($(this).val());
+                });
+                return filter;
+            }
+
+            $('.common_selector').click(function() {
+                filter_data();
+            });
+
+            $('#price_range').slider({
+                range: true,
+                min: 2000,
+                max: 6800000,
+                values: [2000, 6800000],
+                step: 100000,
+                stop: function(event, ui) {
+                    $('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
+                    $('#hidden_minimum_price').val(ui.values[0]);
+                    $('#hidden_maximum_price').val(ui.values[1]);
+                    filter_data();
+                }
+            });
+        })
+    </script>
+
     <!-- Footer Scripts
 ============================================= -->
     <script src="assets/js/jquery-2.2.4.min.js"></script>
@@ -251,6 +378,9 @@
     <script src="assets/js/plugins/jquery.gmap.min.js"></script>
     <script src="assets/js/map-addresses.js"></script>
     <script src="assets/js/map-custom.js"></script>
+
+
+
 </body>
 
 </html>

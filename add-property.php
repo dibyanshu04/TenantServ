@@ -13,6 +13,7 @@ if (strlen($_SESSION['remsuid'] == 0 || $_SESSION['ut'] == 3)) {
         $prodec = $_POST['propertydescription'];
         $type = $_POST['selecttype'];
         $status = $_POST['status'];
+        $approve = 0;
         $location = $_POST['location'];
         $bedrooms = $_POST['bedrooms'];
         $bathrooms = $_POST['bathrooms'];
@@ -102,7 +103,7 @@ if (strlen($_SESSION['remsuid'] == 0 || $_SESSION['ut'] == 3)) {
             move_uploaded_file($_FILES["galleryimage4"]["tmp_name"], "propertyimages/" . $propic4);
             move_uploaded_file($_FILES["galleryimage5"]["tmp_name"], "propertyimages/" . $propic5);
 
-            $query = mysqli_query($con, "insert into tblproperty(UserID,PropertyTitle,PropertDescription,Type,Status,Location,Bedrooms,Bathrooms,Floors,Garages,Area,Size,RentorsalePrice,BeforePricelabel,AfterPricelabel,PropertyID,CenterCooling,Balcony,PetFriendly,Barbeque,FireAlarm,ModernKitchen,Storage,Dryer,Heating,Pool,Laundry,Sauna,Gym,Elevator,DishWasher,EmergencyExit,FeaturedImage,GalleryImage1,GalleryImage2,GalleryImage3,GalleryImage4,GalleryImage5,url,Address,Country,City,State,ZipCode,Neighborhood)value('$uid','$protitle','$prodec','$type','$status','$location','$bedrooms','$bathrooms','$floors','$garages','$area','$size','$srprice','$beforepricelabel','$afterpricelabel','$proid','$ccolling','$balcony','$petfrndly','$barbeque','$firealarm','$modkitchen','$storage','$dryer','$heating','$pool','$laundry','$sauna','$gym','$elevator','$dishwasher','$eexit','$propic','$propic1','$propic2','$propic3','$propic4','$propic5','$url','$proaddress','$procountry','$procity','$prostate','$prozipcode','$neighborhood')");
+            $query = mysqli_query($con, "insert into tblproperty(UserID,PropertyTitle,PropertDescription,Type,Status, approve,Location,Bedrooms,Bathrooms,Floors,Garages,Area,Size,RentorsalePrice,BeforePricelabel,AfterPricelabel,PropertyID,CenterCooling,Balcony,PetFriendly,Barbeque,FireAlarm,ModernKitchen,Storage,Dryer,Heating,Pool,Laundry,Sauna,Gym,Elevator,DishWasher,EmergencyExit,FeaturedImage,GalleryImage1,GalleryImage2,GalleryImage3,GalleryImage4,GalleryImage5,url,Address,Country,City,State,ZipCode,Neighborhood)value('$uid','$protitle','$prodec','$type','$status','$approve','$location','$bedrooms','$bathrooms','$floors','$garages','$area','$size','$srprice','$beforepricelabel','$afterpricelabel','$proid','$ccolling','$balcony','$petfrndly','$barbeque','$firealarm','$modkitchen','$storage','$dryer','$heating','$pool','$laundry','$sauna','$gym','$elevator','$dishwasher','$eexit','$propic','$propic1','$propic2','$propic3','$propic4','$propic5','$url','$proaddress','$procountry','$procity','$prostate','$prozipcode','$neighborhood')");
             if ($query) {
                 echo '<script>alert("Property detail has been added.")</script>';
                 echo "<script>window.location.href ='add-property.php'</script>";
@@ -130,7 +131,7 @@ if (strlen($_SESSION['remsuid'] == 0 || $_SESSION['ut'] == 3)) {
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/css/style.css" rel="stylesheet">
 
-        <title>Real Estate Managment System|| Add Property</title>
+        <title>Real Estate Management System|| Add Property</title>
     </head>
     <script>
         function getsate(val) {
@@ -210,9 +211,9 @@ if (strlen($_SESSION['remsuid'] == 0 || $_SESSION['ut'] == 3)) {
                         <div class="col-xs-12 col-sm-12 col-md-12">
 
                             <form class="mb-0" method="post" enctype="multipart/form-data">
-                                <p style="font-size:16px; color:red" align="center"> <?php if ($msg) {
-                                                                                            echo $msg;
-                                                                                        }  ?> </p>
+                                <p style="font-size:16px; color:red align=center"> <?php if ($msg) {
+                                                                                        echo $msg;
+                                                                                    }  ?> </p>
                                 <div class="form-box">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -566,7 +567,7 @@ if (strlen($_SESSION['remsuid'] == 0 || $_SESSION['ut'] == 3)) {
                                         <div class="col-xs-12 col-sm-12 col-md-12">
                                             <div class="form-group">
                                                 <label for="url">URL*</label>
-                                                <input type="text" class="form-control" name="url" id="url" placeholder="Enter 'src' part  from the sharing link of google maps" >
+                                                <input type="text" class="form-control" name="url" id="url" placeholder="Enter 'src' part  from the sharing link of google maps">
                                             </div>
                                         </div>
                                         <!-- .col-md-12 end -->

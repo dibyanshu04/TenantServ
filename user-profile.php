@@ -7,9 +7,9 @@ if (strlen($_SESSION['remsuid'] == 0)) {
 } else {
     if (isset($_POST['submit'])) {
         $uid = $_SESSION['remsuid'];
-        $fullname = $_POST['fullname'];
+        $fullname = mysqli_real_escape_string($con, $_POST['fullname']);
         $mobno = $_POST['mobilenumber'];
-        $aboutme = $_POST['aboutme'];
+        $aboutme =  mysqli_real_escape_string($con,$_POST['aboutme']);
 
         $query = mysqli_query($con, "update tbluser set FullName ='$fullname', MobileNumber='$mobno',Aboutme ='$aboutme' where ID='$uid'");
         if ($query) {

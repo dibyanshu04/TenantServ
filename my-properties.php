@@ -99,7 +99,7 @@ if (strlen($_SESSION['remsuid'] == 0 || $_SESSION['ut'] == 3)) {
                                                     <?php echo $row['City']; ?>&nbsp;
                                                     <?php echo $row['State']; ?>&nbsp;
                                                     <?php echo $row['Country']; ?></p>
-                                                <p class="property--price"><?php echo $row['RentorsalePrice']; ?></p>
+                                                <p class="property--price">₹ <?php echo $row['RentorsalePrice']; ?></p>
                                             </div>
                                             <!-- .property-info end -->
                                             <div class="property--features">

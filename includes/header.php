@@ -5,9 +5,9 @@ include('includes/dbconnection.php');
 
 if (isset($_POST['signup'])) {
 
-    $fname = $_POST['fullname'];
+    $fname = mysqli_real_escape_string($con, $_POST['fullname']);
     $mobno = $_POST['mobilenumber'];
-    $email = $_POST['email'];
+    $email = mysqli_real_escape_string($con, $_POST['email']);
     $usertype = $_POST['usertype'];
     $password = md5($_POST['password']);
 
@@ -16,30 +16,47 @@ if (isset($_POST['signup'])) {
     if ($result > 0) {
         echo "<script>alert('This email already associated with another account');</script>";
     } else {
-        $query = mysqli_query($con, "insert into tbluser(FullName, Email, MobileNumber, Password,UserType) value('$fname', '$email','$mobno', '$password','$usertype' )");
-        if ($query) {
-            echo "<script>alert('You have successfully registered');</script>";
+        if ($usertype == 1 || $usertype==2) {
+            $query = mysqli_query($con, "insert into tbluser(FullName, Email, MobileNumber, Password,UserType, approve) value('$fname', '$email','$mobno', '$password','$usertype', 0 )");
+            if ($query) {
+                echo "<script>alert('Your Registration is under verification');</script>";
+            } else {
+                echo "<script>alert('Something Went Wrong. Please try again');</script>";
+            }
         } else {
-            echo "<script>alert('Something Went Wrong. Please try again');</script>";
+            $query = mysqli_query($con, "insert into tbluser(FullName, Email, MobileNumber, Password,UserType, approve) value('$fname', '$email','$mobno', '$password','$usertype', 1 )");
+            if ($query) {
+                echo "<script>alert('You have successfully registered');</script>";
+            } else {
+                echo "<script>alert('Something Went Wrong. Please try again');</script>";
+            }
         }
+        
+        
     }
 }
 
 //code for login
 if (isset($_POST['signin'])) {
 
-    $email = $_POST['email'];
+    $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = md5($_POST['password']);
-    $query = mysqli_query($con, "select ID,UserType,Email from tbluser where  Email='$email' && Password='$password' ");
+    $query = mysqli_query($con, "select ID,UserType,Email, approve from tbluser where  Email='$email' && Password='$password' ");
     $ret = mysqli_fetch_array($query);
-    if ($ret > 0) {
+    if ($ret > 0 && $ret['approve']==1) {
         $_SESSION['ut'] = $ret['UserType'];
         $_SESSION['remsuid'] = $ret['ID'];
         $_SESSION['uemail'] = $ret['Email'];
 
         header('location:index.php');
     } else {
-        echo "<script>alert('Invalid Details');</script>";
+        if ($ret['UserType']==3) {
+            echo "<script>alert('Invalid Details');</script>";
+        } else {
+            echo "<script>alert('Invalid Details Or Your registration is under VERIFICATION');</script>";
+        }
+        
+        
     }
 }
 
@@ -56,8 +73,8 @@ if (isset($_POST['signin'])) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="logo" href="index.php">
-                    <img src="assets/images/logo/newlogo.png" alt="Tenant Serv" width="20%">
+                <a class="logo" href="index">
+                    <img src="assets/images/logo/MainLogo.png" alt="Tenant Serv" width="20%">
                 </a>
             </div>
 

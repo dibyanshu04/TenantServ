@@ -10,7 +10,7 @@ if (strlen($_SESSION['remsaid'] == 0)) {
         $cmsaid = $_SESSION['remsaid'];
         $pagetitle = $_POST['pagetitle'];
         $pagedes = $_POST['pagedes'];
-        $email = $_POST['email'];
+        $email = mysqli_real_escape_string($con, $_POST['email']);
         $mobnum = $_POST['mobnum'];
 
         $query = mysqli_query($con, "update tblpage set PageTitle='$pagetitle',PageDescription='$pagedes',Email='$email',MobileNumber='$mobnum' where  PageType='contactus'");

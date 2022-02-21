@@ -3,29 +3,27 @@ session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 
-if(isset($_POST['submit']))
-  {
-    $contactno=$_POST['contactno'];
-    $email=$_POST['email'];
+if (isset($_POST['submit'])) {
+    $contactno = $_POST['contactno'];
+    $email = mysqli_real_escape_string($con, $_POST['email']);
 
-        $query=mysqli_query($con,"select ID from tbluser where  Email='$email' and MobileNumber='$contactno' ");
-    $ret=mysqli_fetch_array($query);
-    if($ret>0){
-      $_SESSION['contactno']=$contactno;
-      $_SESSION['email']=$email;
-     header('location:reset-password.php');
+    $query = mysqli_query($con, "select ID from tbluser where  Email='$email' and MobileNumber='$contactno' ");
+    $ret = mysqli_fetch_array($query);
+    if ($ret > 0) {
+        $_SESSION['contactno'] = $contactno;
+        $_SESSION['email'] = $email;
+        header('location:reset-password.php');
+    } else {
+        $msg = "Invalid Details. Please try again.";
     }
-    else{
-      $msg="Invalid Details. Please try again.";
-    }
-  }
-  ?>
+}
+?>
 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 
 <head>
- 
+
     <!-- Fonts
     ============================================= -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CPoppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -34,16 +32,16 @@ if(isset($_POST['submit']))
     <link href="assets/css/external.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
-   
-    <title>Real Estate Managment System|| Forgot Password</title>
+
+    <title>Real Estate Management System|| Forgot Password</title>
 </head>
 
 <body>
     <!-- Document Wrapper
     ============================================= -->
     <div id="wrapper" class="wrapper clearfix">
-        <?php include_once('includes/header.php');?>
-        
+        <?php include_once('includes/header.php'); ?>
+
         <!-- Page Title #1
 ============================================ -->
         <section id="page-title" class="page-title bg-overlay bg-overlay-dark2">
@@ -81,44 +79,45 @@ if(isset($_POST['submit']))
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
 
-                       
-                           
-  
-                          
-                           
 
-                            <div class="form-box">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <h4 class="form--title">Forgot Password</h4>
-                                        
-                                        <form role="form" method="post" action="">
-                    <p style="font-size:16px; color:red" align="center"> <?php if($msg){
-    echo $msg;
-  }  ?> </p>
-                    <div class="form-group">
-                        <input class="form-control form-control-lg" type="email" name="email" required="true" placeholder="Your Email" >
 
-                    </div>
-                     <div class="form-group">
-                        <input class="form-control form-control-lg" type="type" name="contactno" required="true" maxlength="10" pattern="[0-9]+" placeholder="Mobile Number">
-                        
-                    </div>
-                    <div class="form-group pt-1"><button type="submit" class="btn btn-primary btn-lg btn-block" name="submit">Reset</button></div>
-                </form>             </div>
-                                    <!-- .col-md-12 end -->
-               
-                                   
-                                   
-                                   
-                                    <!-- .col-md-12 end -->
 
+
+
+
+                        <div class="form-box">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <h4 class="form--title">Forgot Password</h4>
+
+                                    <form role="form" method="post" action="">
+                                        <p style="font-size:16px; color:red" align="center"> <?php if ($msg) {
+                                                                                                    echo $msg;
+                                                                                                }  ?> </p>
+                                        <div class="form-group">
+                                            <input class="form-control form-control-lg" type="email" name="email" required="true" placeholder="Your Email">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control form-control-lg" type="type" name="contactno" required="true" maxlength="10" pattern="[0-9]+" placeholder="Mobile Number">
+
+                                        </div>
+                                        <div class="form-group pt-1"><button type="submit" class="btn btn-primary btn-lg btn-block" name="submit">Reset</button></div>
+                                    </form>
                                 </div>
-                                <!-- .row end -->
+                                <!-- .col-md-12 end -->
+
+
+
+
+                                <!-- .col-md-12 end -->
+
                             </div>
-                  
-                            
-                       
+                            <!-- .row end -->
+                        </div>
+
+
+
                     </div>
                     <!-- .col-md-12 end -->
                 </div>
@@ -131,7 +130,7 @@ if(isset($_POST['submit']))
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
                         <h3>Join our professional team & agents to start selling your house</h3>
-                         <a href="contact.php" class="btn btn--primary">Contact</a>
+                        <a href="contact.php" class="btn btn--primary">Contact</a>
                     </div>
                     <!-- .col-md-6 -->
                 </div>
@@ -139,19 +138,19 @@ if(isset($_POST['submit']))
             </div>
             <!-- .container -->
         </section>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container-fluid -->
-            </nav>
+    </div>
+    <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+    </nav>
 
-        </header>
-        
-        
+    </header>
 
-        <!-- Footer #1
+
+
+    <!-- Footer #1
 ============================================= -->
-        <?php include_once('includes/footer.php');?>
+    <?php include_once('includes/footer.php'); ?>
     </div>
     <!-- #wrapper end -->
 
@@ -163,4 +162,3 @@ if(isset($_POST['submit']))
 </body>
 
 </html>
- 

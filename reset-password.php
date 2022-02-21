@@ -4,27 +4,24 @@ error_reporting(0);
 include('includes/dbconnection.php');
 error_reporting(0);
 
-if(isset($_POST['submit']))
-  {
-    $contactno=$_SESSION['contactno'];
-    $email=$_SESSION['email'];
-    $password=md5($_POST['newpassword']);
+if (isset($_POST['submit'])) {
+    $contactno = $_SESSION['contactno'];
+    $email = $_SESSION['email'];
+    $password = md5($_POST['newpassword']);
 
-        $query=mysqli_query($con,"update tbluser set Password='$password'  where  Email='$email' && MobileNumber='$contactno' ");
-   if($query)
-   {
-echo "<script>alert('Password successfully changed');</script>";
-session_destroy();
-   }
-  
-  }
-  ?>
+    $query = mysqli_query($con, "update tbluser set Password='$password'  where  Email='$email' && MobileNumber='$contactno' ");
+    if ($query) {
+        echo "<script>alert('Password successfully changed');</script>";
+        session_destroy();
+    }
+}
+?>
 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 
 <head>
- 
+
     <!-- Fonts
     ============================================= -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CPoppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -33,30 +30,27 @@ session_destroy();
     <link href="assets/css/external.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
-   
-    <title>Real Estate Managment System|| Reset Password</title>
-    
-       <script type="text/javascript">
-function checkpass()
-{
-if(document.changepassword.newpassword.value!=document.changepassword.confirmpassword.value)
-{
-alert('New Password and Confirm Password field does not match');
-document.changepassword.confirmpassword.focus();
-return false;
-}
-return true;
-} 
 
-</script>
+    <title>Real Estate Management System|| Reset Password</title>
+
+    <script type="text/javascript">
+        function checkpass() {
+            if (document.changepassword.newpassword.value != document.changepassword.confirmpassword.value) {
+                alert('New Password and Confirm Password field does not match');
+                document.changepassword.confirmpassword.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
     <!-- Document Wrapper
     ============================================= -->
     <div id="wrapper" class="wrapper clearfix">
-        <?php include_once('includes/header.php');?>
-        
+        <?php include_once('includes/header.php'); ?>
+
         <!-- Page Title #1
 ============================================ -->
         <section id="page-title" class="page-title bg-overlay bg-overlay-dark2">
@@ -94,45 +88,46 @@ return true;
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
 
-                       
-                           
-  
-                          
-                           
 
-                            <div class="form-box">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <h4 class="form--title">Reset Password</h4>
-                                        
-                           <form role="form" method="post" action="" name="changepassword" onsubmit="return checkpass();">
-                    <p style="font-size:16px; color:red" align="center"> <?php if($msg){
-    echo $msg;
-  }  ?> </p>
-                    <div class="form-group">
-                        <input type="password" name="newpassword" class="form-control form-control-lg" placeholder="New Password" required="true">
 
-                    </div>
-                     <div class="form-group">
-                        <input type="password" name="confirmpassword" class="form-control form-control-lg" placeholder="Confirm Password" required="true">
-                        
-                    </div>
-                    <div class="form-group pt-1"><button type="submit" class="btn btn-primary btn-lg btn-block" name="submit">Reset</button></div>
-                </form>           </div>
-                                    <!-- .col-md-12 end -->
-                     
-                
-                                   
-                                   
-                                   
-                                    <!-- .col-md-12 end -->
 
+
+
+
+                        <div class="form-box">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <h4 class="form--title">Reset Password</h4>
+
+                                    <form role="form" method="post" action="" name="changepassword" onsubmit="return checkpass();">
+                                        <p style="font-size:16px; color:red" align="center"> <?php if ($msg) {
+                                                                                                    echo $msg;
+                                                                                                }  ?> </p>
+                                        <div class="form-group">
+                                            <input type="password" name="newpassword" class="form-control form-control-lg" placeholder="New Password" required="true">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="confirmpassword" class="form-control form-control-lg" placeholder="Confirm Password" required="true">
+
+                                        </div>
+                                        <div class="form-group pt-1"><button type="submit" class="btn btn-primary btn-lg btn-block" name="submit">Reset</button></div>
+                                    </form>
                                 </div>
-                                <!-- .row end -->
+                                <!-- .col-md-12 end -->
+
+
+
+
+
+                                <!-- .col-md-12 end -->
+
                             </div>
-                  
-                            
-                       
+                            <!-- .row end -->
+                        </div>
+
+
+
                     </div>
                     <!-- .col-md-12 end -->
                 </div>
@@ -145,7 +140,7 @@ return true;
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
                         <h3>Join our professional team & agents to start selling your house</h3>
-                         <a href="contact.php" class="btn btn--primary">Contact</a>
+                        <a href="contact.php" class="btn btn--primary">Contact</a>
                     </div>
                     <!-- .col-md-6 -->
                 </div>
@@ -153,19 +148,19 @@ return true;
             </div>
             <!-- .container -->
         </section>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container-fluid -->
-            </nav>
+    </div>
+    <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+    </nav>
 
-        </header>
-        
-        
+    </header>
 
-        <!-- Footer #1
+
+
+    <!-- Footer #1
 ============================================= -->
-        <?php include_once('includes/footer.php');?>
+    <?php include_once('includes/footer.php'); ?>
     </div>
     <!-- #wrapper end -->
 
@@ -177,4 +172,3 @@ return true;
 </body>
 
 </html>
- 
