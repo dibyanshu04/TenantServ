@@ -73,7 +73,7 @@ if (isset($_POST['signin'])) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="logo" href="index">
+                <a class="logo" href="index.php">
                     <img src="assets/images/logo/MainLogo.png" alt="Tenant Serv" width="20%">
                 </a>
             </div>

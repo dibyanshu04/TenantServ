@@ -3,6 +3,10 @@ session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 
+
+$locality;
+$city;
+
 if (isset($_POST['submit'])) {
     $fullname = mysqli_real_escape_string($con, $_POST['fullname']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -29,7 +33,7 @@ if (isset($_POST['submitreview'])) {
         $uid = $_SESSION['remsuid'];
         $pid = $_GET['proid'];
         $query = mysqli_query($con, "insert into tblfeedback(UserId,PropertyId,UserRemark) value('$uid','$pid','$review')");
-        echo '<script>alert("Your review successfully submited, after review it will publish")</script>';
+        echo '<script>alert("Your review successfully submited, after verification it will publish")</script>';
         echo "<script>window.location.href='properties-grid.php'</script>";
     }
 }
@@ -72,13 +76,19 @@ if (isset($_POST['submitreview'])) {
             <div class="bg-section">
                 <img src="assets/images/page-titles/1.jpg" alt="Background" />
             </div>
+
+            <?php
+            $proid = $_GET['proid'];
+
+            ?>
+
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
                         <div class="title title-1 text-center">
                             <div class="title--content">
                                 <div class="title--heading">
-                                    <h1>Single Property</h1>
+                                    <h1 id="pro-title">Single Property</h1>
                                 </div>
                                 <ol class="breadcrumb">
                                     <li><a href="index.php">Home</a></li>
@@ -95,6 +105,7 @@ if (isset($_POST['submitreview'])) {
             </div>
             <!-- .container end -->
         </section>
+
         <!-- #page-title end -->
 
         <!-- property single gallery
@@ -106,6 +117,8 @@ if (isset($_POST['submitreview'])) {
             $query = mysqli_query($con, "select tblproperty.*,tblcountry.CountryName,tblstate.StateName from tblproperty join tblcountry on tblcountry.ID=tblproperty.Country join tblstate on tblstate.ID=tblproperty.State where tblproperty.ID='$proid'");
             $num = mysqli_num_rows($query);
             while ($row = mysqli_fetch_array($query)) {
+                $locality = $row['Neighborhood'];
+                $city = $row['City'];
             ?>
                 <div class="container">
                     <div class="row">
@@ -113,7 +126,7 @@ if (isset($_POST['submitreview'])) {
                             <div class="property-single-gallery-info">
                                 <div class="property--info clearfix">
                                     <div class="pull-left">
-                                        <h5 class="property--title"><?php echo $row['PropertyTitle']; ?></h5>
+                                        <h5 class="property--title" id="property--title"><?php echo $row['PropertyTitle']; ?></h5>
                                         <p class="property--location"><?php echo $row['Address']; ?>, <?php echo $row['CountryName']; ?>, <?php echo $row['StateName']; ?>,<?php echo $row['City']; ?>,<?php echo $row['ZipCode']; ?></p>
                                     </div>
                                     <div class="pull-right">
@@ -507,7 +520,7 @@ if (isset($_POST['submitreview'])) {
                                     </div>
                                     <!-- .col-md-12 end -->
                                     <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <iframe src="<?php echo $row['url'] ?>" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                        <iframe src="<?php echo $row['Url'] ?>" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                         <br>
                                         <br>
                                         <ul class="list-unstyled mb-20">
@@ -517,6 +530,7 @@ if (isset($_POST['submitreview'])) {
                                             <li><span>Country:</span><?php echo $row['CountryName']; ?></li>
                                             <li><span>State:</span><?php echo $row['StateName']; ?></li>
                                             <li><span>Zip/Postal code:</span><?php echo $row['ZipCode']; ?></li>
+                                            <li><span>Locality:</span><?php echo $row['Neighborhood']; ?></li>
                                         </ul>
                                     </div>
                                     <!-- .col-md-12 end -->
@@ -525,6 +539,9 @@ if (isset($_POST['submitreview'])) {
                                 <!-- .row end -->
                             </div>
                         <?php } ?>
+
+
+
                         <!-- .property-single-location end -->
                         <?php $pid = intval($_GET['proid']);
                         $qry = mysqli_query($con, "select tblfeedback.UserRemark,tblfeedback.PostingDate,tbluser.FullName from tblfeedback join tbluser on tbluser.ID=tblfeedback.UserId where tblfeedback.PropertyId='$pid' and tblfeedback.Is_Publish='1'");
@@ -767,6 +784,71 @@ if (isset($_POST['submitreview'])) {
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="heading heading-2  mb-70">
+                            <h2 class="heading--title">Near By Properties</h2>
+                        </div>
+                        <!-- .heading-title end -->
+                    </div>
+                    <!-- .col-md-12 end -->
+                </div>
+                <!-- .row end -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="carousel carousel-dots" data-slide="3" data-slide-rs="2" data-autoplay="true" data-nav="false" data-dots="true" data-space="25" data-loop="true" data-speed="800">
+                            <!-- .property-item #1 -->
+                            <?php
+
+                            $query = mysqli_query($con, "select * from tblproperty where Neighborhood = '$locality'AND city = '$city' AND ID != '$proid' order by rand() limit 9");
+                            while ($row = mysqli_fetch_array($query)) {
+                            ?>
+                                <div class="property-item">
+                                    <div class="property--img">
+                                        <a href="single-property-detail.php?proid=<?php echo $row['ID']; ?>">
+                                            <img src="propertyimages/<?php echo $row['FeaturedImage']; ?>" alt="<?php echo $row['PropertyTitle']; ?>" width='380' height='300'>
+                                            <span class="property--status"><?php echo $row['Status']; ?></span>
+                                        </a>
+                                    </div>
+                                    <div class="property--content">
+                                        <div class="property--info">
+                                            <h5 class="property--title"><a href="single-property-detail.php?proid=<?php echo $row['ID']; ?>">
+                                                    <?php echo $row['PropertyTitle']; ?></a></h5>
+                                            <p class="property--location"><?php echo $row['Address']; ?>&nbsp;
+                                                <?php echo $row['City']; ?>&nbsp;
+                                                <?php echo $row['State']; ?>&nbsp;
+                                                <?php echo $row['Country']; ?></p>
+                                            <p class="property--price">₹ <?php echo $row['RentorsalePrice']; ?></p>
+                                        </div>
+                                        <!-- .property-info end -->
+                                        <div class="property--features">
+                                            <ul class="list-unstyled mb-0">
+                                                <li><span class="feature">Beds:</span><span class="feature-num"><?php echo $row['Bedrooms']; ?></span></li>
+                                                <li><span class="feature">Baths:</span><span class="feature-num"><?php echo $row['Bathrooms']; ?></span></li>
+                                                <li><span class="feature">Area:</span><span class="feature-num"><?php echo $row['Area']; ?></span></li>
+                                            </ul>
+                                        </div>
+                                        <!-- .property-features end -->
+                                    </div>
+                                </div>
+                            <?php } ?>
+
+
+                        </div>
+                        <!-- .carousel end -->
+                    </div>
+                    <!-- .col-md-12 -->
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .container -->
+        </section>
+        <!-- #properties-carousel  end  -->
+
+        <!-- properties-carousel
+============================================= -->
+        <section id="properties-carousel" class="properties-carousel pt-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="heading heading-2  mb-70">
                             <h2 class="heading--title">Similar Properties</h2>
                         </div>
                         <!-- .heading-title end -->
@@ -872,6 +954,10 @@ if (isset($_POST['submitreview'])) {
         });
     </script>
     <script src="assets/js/map-custom.js"></script>
+    <script>
+        var title = document.querySelector('#property--title').textContent;
+        document.getElementById("pro-title").innerHTML = title;
+    </script>
 </body>
 
 </html>

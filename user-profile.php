@@ -91,7 +91,7 @@ if (strlen($_SESSION['remsuid'] == 0)) {
                         <div class="col-xs-12 col-sm-12 col-md-8">
 
                             <form class="mb-0" method="post">
-                                <p style="font-size:16px; color:red" align="center"> <?php if ($msg) {
+                                <p style=" font-size:20px; color:green"  align="center"> <?php if ($msg) {
                                                                                             echo $msg;
                                                                                         }  ?> </p>
 

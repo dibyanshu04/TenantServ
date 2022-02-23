@@ -631,7 +631,7 @@ if (strlen($_SESSION['remsuid'] == 0 || $_SESSION['ut'] == 3)) {
                                         <!-- .col-md-4 end -->
                                         <div class="col-xs-12 col-sm-4 col-md-4">
                                             <div class="form-group">
-                                                <label for="neighborhood">Neighborhood</label>
+                                                <label for="neighborhood">Locality</label>
                                                 <input type="text" class="form-control" name="neighborhood" id="neighborhood">
                                             </div>
                                         </div>

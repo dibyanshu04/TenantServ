@@ -209,6 +209,83 @@ if (strlen($_SESSION['remsaid'] == 0)) {
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card">
+                                <?php $query8 = mysqli_query($con, "Select * from tblcontact where status = '0'");
+                                $totalpropertylisted = mysqli_num_rows($query8);
+                                ?>
+                                <!-- <span style="height: 20px; width: 5px; background: red; color:red; "></span> -->
+                                <h5 class="card-header"> New Messages Received</h5>
+                                <div class="card-body">
+                                    <div class="metric-value d-inline-block">
+                                        <h1 class="mb-1"><?php echo $totalpropertylisted; ?></h1>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-footer text-center bg-white">
+                                    <a href="unseen-messages.php" class="card-link">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card">
+                                <?php $query7 = mysqli_query($con, "Select * from tblproperty where approve = '0'");
+                                $totalpropertylisted = mysqli_num_rows($query7);
+                                ?>
+                                <h5 class="card-header">New Property To Verify</h5>
+                                <div class="card-body">
+                                    <div class="metric-value d-inline-block">
+                                        <h1 class="mb-1"><?php echo $totalpropertylisted; ?></h1>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-footer text-center bg-white">
+                                    <a href="pending-approval-property.php" class="card-link">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card">
+                                <?php $query7 = mysqli_query($con, "Select * from tbluser where approve = '0'");
+                                $totalpropertylisted = mysqli_num_rows($query7);
+                                ?>
+                                <h5 class="card-header">New Agents / Owners To Verify</h5>
+                                <div class="card-body">
+                                    <div class="metric-value d-inline-block">
+                                        <h1 class="mb-1"><?php echo $totalpropertylisted; ?></h1>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-footer text-center bg-white">
+                                    <a href="pending-approval.php" class="card-link">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card new-card">
+                                <?php $query7 = mysqli_query($con, "Select * from tblfeedback where Is_Publish = '0'");
+                                $totalpropertylisted = mysqli_num_rows($query7);
+                                ?>
+                                <h5 class="card-header">New Reviews</h5>
+                                <div class="card-body">
+                                    <div class="metric-value d-inline-block">
+                                        <h1 class="mb-1"><?php echo $totalpropertylisted; ?></h1>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-footer text-center bg-white">
+                                    <a href="unapproved-reviews.php" class="card-link">View Details</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

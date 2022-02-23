@@ -49,9 +49,9 @@
 
                             <div class="widget--content">
                                 <ul class="list-unstyled mb-0">
-                                    <input type="hidden" id="hidden_minimum_price" value="2000">
-                                    <input type="hidden" id="hidden_maximum_price" value="6800000">
-                                    <p id="price_show">2000-6800000</p>
+                                    <input type="hidden" id="hidden_minimum_price" value="20000">
+                                    <input type="hidden" id="hidden_maximum_price" value="680000000">
+                                    <p id="price_show">20000-680000000</p>
                                     <div id="price_range"></div>
                                 </ul>
                             </div>
@@ -355,10 +355,10 @@
 
             $('#price_range').slider({
                 range: true,
-                min: 2000,
-                max: 6800000,
-                values: [2000, 6800000],
-                step: 100000,
+                min: 20000,
+                max: 680000000,
+                values: [20000, 680000000],
+                step: 100,
                 stop: function(event, ui) {
                     $('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
                     $('#hidden_minimum_price').val(ui.values[0]);

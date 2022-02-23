@@ -181,7 +181,15 @@ include('includes/dbconnection.php');
                                     <div class="property--img">
                                         <a href="single-property-detail.php?proid=<?php echo $row['ID']; ?>">
                                             <img src="propertyimages/<?php echo $row['FeaturedImage']; ?>" alt="<?php echo $row['PropertyTitle']; ?>" width='380' height='300'>
-                                            <span class="property--status"><?php echo $row['Status']; ?></span>
+                                            <?php 
+                                            if ($row['Status'] == "Sale") {
+                                                echo '<span class="property--status sale" >Sale</span>';
+                                            } else {
+                                                echo '<span class="property--status rent" style="color: black; font-weight: 600; background-color: rgb(255, 174, 0);">Rent</span>';
+                                            }
+                                            
+                                            ?>
+                                            
                                         </a>
                                     </div>
                                     <div class="property--content">
