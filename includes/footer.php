@@ -110,7 +110,7 @@
                                  <li>Enter Your Name<input type="text" name="name"></li>
                                  <li>Enter Your Email<input type="email" name="email"></li>
                                  <li>Write Your Review<textarea name="review" id="new-review" style="width: 110%;" rows="5"></textarea></li>
-                                 <li><input type="submit"></li>
+                                 <li style="color: #64ddbb;"><input type="submit"></li>
                              </form>
                          </ul>
                      </div>
@@ -125,9 +125,9 @@
 
      <!-- Copyrights
     ============================================= -->
-     <div class="footer--copyright text-center">
+     <div class="footer--copyright text-center " style="background-color: #e8e8e8;  padding: 15px">
          <div class="container">
-             <div class="row footer--bar" style="background-color: #e8e8e8; border-radius: 100%;  padding: 6px 8px; margin: 0px 20px 30px;">
+             <div class="row footer--bar" style="padding: 6px 8px; margin: 0px 20px 30px;">
                  <div class="col-md-6">
                      <span>© Tenant Serv - All right reserved</span>
                  </div>

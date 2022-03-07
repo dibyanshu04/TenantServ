@@ -26,6 +26,127 @@ include('includes/dbconnection.php');
     <!-- Document Title
     ============================================= -->
     <title>Tenant Serv||Home Page</title>
+    <style media="screen">
+
+    main {
+      text-align: center;
+      justify-content: center;
+      text-decoration: none;
+      font-family: "Source Sans Pro", sans-serif;
+      font-weight: 400;
+    }
+    hr{
+	border-color: rgb(229, 231, 235);
+}
+
+p, hr{
+	margin: 0;
+}
+section{
+	padding: 3rem;
+}
+
+    .feature-grid {
+    	display: grid;
+    	gap: 1.5rem;
+    	grid-template-columns: repeat(4, 1fr);
+    }
+
+    .feature-image {
+    	transition: 0.2s;
+    }
+
+    .feature-image:hover {
+    	transform: scale(1.3);
+    }
+
+    .feature-title {
+    	font-size: 1.125rem;
+    }
+
+    .feature-description {
+    	font-size: 0.875rem;
+    }
+
+    .title {
+    	font-size: 2rem;
+    	font-weight: 400;
+    	color: rgb(120, 118, 118);
+    }
+
+    .enquiry {
+    	background-color: rgb(244, 244, 244);
+    	padding: 3rem 0;
+    	color: rgb(120, 118, 118);
+    }
+
+    .enquiry-content {
+    	display: flex;
+    	align-items: center;
+    	width: 100%;
+    }
+
+    .enquiry-image{
+    	margin-left: auto;
+    	margin-right: 4rem;
+    }
+
+    .enquiry-text{
+    	margin-bottom: 2rem;
+    	font-size: 1.3rem;
+    }
+
+    .enquiry-description {
+    	width: fit-content;
+    	height: fit-content;
+    	text-align: left;
+    	margin-right: auto;
+    	margin-left: 4rem;
+    	padding: 0;
+    }
+
+    .enquiry-description > p{
+    	width: 100%;
+    }
+
+    .enquiry-btn{
+    	margin: 0;
+    	background-color: #64ddbb;
+    	border-style: none;
+    	color: white;
+    	font-size: 1rem;
+    }
+
+    .flexbox {
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    }
+
+
+    .stat{
+    	margin:  auto;
+    }
+
+    .stat-count{
+    	border: 4px solid #64ddbb;
+    	border-radius: 50%;
+    	width: 15rem;
+    	height: 15rem;
+    	color: #64ddbb;
+    	font-size: 4rem;
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	margin: auto;
+    }
+
+    .stat-text{
+    	font-weight: 300;
+    	display: block;
+      padding: 30px 0 0 0;
+    }
+    </style>
 </head>
 
 <body>
@@ -175,21 +296,21 @@ include('includes/dbconnection.php');
 
                             $query = mysqli_query($con, "select * from tblproperty where approve='1' order by rand() limit 9");
                             while ($row = mysqli_fetch_array($query)) {
-                               
+
                             ?>
                                 <div class="property-item">
                                     <div class="property--img">
                                         <a href="single-property-detail.php?proid=<?php echo $row['ID']; ?>">
                                             <img src="propertyimages/<?php echo $row['FeaturedImage']; ?>" alt="<?php echo $row['PropertyTitle']; ?>" width='380' height='300'>
-                                            <?php 
+                                            <?php
                                             if ($row['Status'] == "Sale") {
                                                 echo '<span class="property--status sale" >Sale</span>';
                                             } else {
                                                 echo '<span class="property--status rent" style="color: black; font-weight: 600; background-color: rgb(255, 174, 0);">Rent</span>';
                                             }
-                                            
+
                                             ?>
-                                            
+
                                         </a>
                                     </div>
                                     <div class="property--content">
@@ -213,8 +334,8 @@ include('includes/dbconnection.php');
                                         <!-- .property-features end -->
                                     </div>
                                 </div>
-                            <?php 
-                                
+                            <?php
+
                             }
                             ?>
 
@@ -230,10 +351,90 @@ include('includes/dbconnection.php');
         </section>
         <!-- #properties-carousel  end  -->
 
+        <main>
+
+        <section class="features" style="padding: 3rem 0;">
+        				<h1 class="title">Why TenantServ</h1>
+        				<div class="feature-grid">
+        					<div class="feature" style="padding: 3rem 0;">
+        						<img class="feature-image" src="assets/images/indeximage/feature1.png" />
+        						<p class="feature-title">Avoid Brokers</p>
+        						<p class="feature-description">
+        							Save brokerage fees by connecting directly to owners
+        						</p>
+        					</div>
+        					<div class="feature" style="padding: 3rem 0;">
+        						<img class="feature-image" src="assets/images/indeximage/feature2.png" />
+        						<p class="feature-title">Free Listing</p>
+        						<p class="feature-description">
+        							Easily list your business
+        						</p>
+        					</div>
+        					<div class="feature" style="padding: 3rem 0;">
+        						<img class="feature-image" src="assets/images/indeximage/feature3.png" />
+        						<p class="feature-title">Shortlist Without Visit</p>
+        						<p class="feature-description">
+        							Information is readily available, making the process easier
+        						</p>
+        					</div>
+        					<div class="feature" style="padding: 3rem 0;">
+        						<img class="feature-image" src="assets/images/indeximage/feature4.png" />
+        						<p class="feature-title">Rental Agreement</p>
+        						<p class="feature-description">
+        							Providing assistance with the creation of a rental agreement and related paperwork
+        						</p>
+        					</div>
+        				</div>
+        	</section>
+
+      <section class="enquiry">
+				<h1 class="title">
+					Plan for builders offered by TenantServ
+				</h1>
+				<div class="enquiry-content">
+					<div class="enquiry-image">
+						<img
+							src="assets/images/indeximage/enquiryimg.png"
+						/>
+					</div>
+
+					<div class="enquiry-description">
+						<p class="enquiry-text block">
+							We can help you sell or rent your projects
+						</p>
+						<button class="btn enquiry-btn block">Enquiry Now</button>
+						<hr />
+						<p class="enquiry-contact block">
+							For Builder Enquiries: +91 00
+						</p>
+					</div>
+				</div>
+			</section>
+
+      <section class="stats">
+				<h1 class="title">
+					We Make A Difference
+				</h1>
+				<div class="flexbox">
+					<div class="savings stat">
+						<div class="stat-count">000</div>
+						<h5 class="stat-text">Brokerage saved monthly</h5>
+					</div>
+					<div class="customers stat">
+						<div class="stat-count">000</div>
+						<h5 class="stat-text">Customers Connected Monthly</h5>
+					</div>
+					<div class="listings stat">
+						<div class="stat-count">000</div>
+						<h5 class="stat-text">New Listings Monthly</h5>
+					</div>
+				</div>
+			</section>
+  </main>
         <!-- Feature
 
 
-     
+
 ============================================= -->
         <section id="cta" class="cta cta-1 text-center bg-overlay bg-overlay-dark pt-90">
             <div class="bg-section"><img src="assets/images/cta/bg-1.jpg" alt="Background"></div>
